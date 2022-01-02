@@ -21,13 +21,13 @@ public class LoginTest {
     @Test
     public void loginWithValidCredentials() {
 
-        WebElement accountLink = driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label"));
+        WebElement accountLink = driver.findElement(By.cssSelector(".skip-account"));
         accountLink.click();
-        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
+        driver.findElement(By.cssSelector("#header-account li.last a")).click();
         driver.findElement(By.id("email")).sendKeys("murvai@mailinator.com");
         driver.findElement(By.id("pass")).sendKeys("123456");
         driver.findElement(By.id("send2")).click();
-        WebElement welcomeElement = driver.findElement(By.cssSelector("body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div > div.welcome-msg > p.hello > strong"));
+        WebElement welcomeElement = driver.findElement(By.cssSelector("p.hello strong"));
         String welcomeText = welcomeElement.getText();
 
         Assert.assertTrue(welcomeElement.isDisplayed());
@@ -37,13 +37,13 @@ public class LoginTest {
 
     @Test
     public void loginWithInvalidCredentials() {
-        WebElement accountLink = driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label"));
+        WebElement accountLink = driver.findElement(By.cssSelector(".skip-account"));
         accountLink.click();
-        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
+        driver.findElement(By.cssSelector("#header-account li.last a")).click();
         driver.findElement(By.id("email")).sendKeys("murvai1@mailinator.com.org");
         driver.findElement(By.id("pass")).sendKeys("123456");
         driver.findElement(By.id("send2")).click();
-        WebElement webElement = driver.findElement(By.cssSelector("body > div > div.page > div.main-container.col1-layout > div > div > div.account-login > ul > li > ul > li > span"));
+        WebElement webElement = driver.findElement(By.cssSelector("ul.messages .error-msg span"));
 
         Assert.assertTrue(webElement.isDisplayed());
         Assert.assertEquals("Invalid login or password.", webElement.getText());

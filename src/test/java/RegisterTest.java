@@ -20,18 +20,18 @@ public class RegisterTest {
     @Test
     public void registertest(){
 
-        WebElement accountLink = driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label"));
+        WebElement accountLink = driver.findElement(By.cssSelector(".skip-account"));
         accountLink.click();
-        driver.findElement(By.cssSelector("#header-account > div > ul > li:nth-child(5) > a")).click();
+        driver.findElement(By.cssSelector("#header-account li:nth-child(5) a")).click();
         driver.findElement(By.id("firstname")).sendKeys("murvai");
         driver.findElement(By.id("lastname")).sendKeys("murvai");
         driver.findElement(By.id("email_address")).sendKeys("murvai_"+java.util.UUID.randomUUID()+"@mailinator.com");
         driver.findElement(By.id("password")).sendKeys("123456");
         driver.findElement(By.id("confirmation")).sendKeys("123456");
         driver.findElement(By.id("is_subscribed")).click();
-        driver.findElement(By.cssSelector("#form-validate > div.buttons-set > button > span > span")).click();
+        driver.findElement(By.cssSelector(".account-create button[type=submit]")).click();
 
-        WebElement webElement = driver.findElement(By.cssSelector("body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div > ul > li > ul > li > span"));
+        WebElement webElement = driver.findElement(By.cssSelector(".success-msg span"));
         String succesText = webElement.getText();
 
         Assert.assertTrue(webElement.isDisplayed());
