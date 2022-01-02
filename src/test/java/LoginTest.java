@@ -12,7 +12,7 @@ public class LoginTest {
     private WebDriver driver;
 
     @Before
-    public void openBrowser(){
+    public void openBrowser() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://testfasttrackit.info/selenium-test/");
@@ -50,8 +50,40 @@ public class LoginTest {
 
     }
 
+    @Test
+    public void logOutTest() {
+        WebElement accountLink = driver.findElement(By.cssSelector(".skip-account"));
+        accountLink.click();
+        driver.findElement(By.cssSelector("#header-account li.last a")).click();
+        driver.findElement(By.id("email")).sendKeys("murvai@mailinator.com");
+        driver.findElement(By.id("pass")).sendKeys("123456");
+        driver.findElement(By.id("send2")).click();
+        accountLink = driver.findElement(By.cssSelector(".skip-account"));
+        accountLink.click();
+        driver.findElement(By.cssSelector("#header-account li.last a")).click();
+        WebElement webElement = driver.findElement(By.cssSelector(".page-title h1"));
+        String actual = webElement.getText();
+        Assert.assertEquals("YOU ARE NOW LOGGED OUT", actual);
+    }
+    @Test
+    public void forgotPassword(){
+        WebElement accountLink = driver.findElement(By.cssSelector(".skip-account"));
+        accountLink.click();
+        driver.findElement(By.cssSelector("#header-account li.last a")).click();
+        driver.findElement(By.cssSelector(".f-left ")).click();
+        driver.findElement(By.id("email_address")).sendKeys("murvai@mailinator.com");
+        driver.findElement(By.cssSelector(".buttons-set button[type=submit]")).click();
+        WebElement webElement = driver.findElement(By.cssSelector(".success-msg span"));
+        String actual = webElement.getText();
+        Assert.assertEquals("If there is an account associated with murvai@mailinator.com you will receive an email with a link to reset your password.", actual);
+
+    }
+
+
+
+
     @After
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.close();
     }
 }
